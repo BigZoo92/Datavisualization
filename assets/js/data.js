@@ -92,7 +92,7 @@ d3.json('./assets/json/land-50m.json')
             console.log(data3[147]["geolocation"]);
             function render(land) {
               context.clearRect(0, 0, width, height);
-              context.beginPath(), path(sphere), context.fillStyle = "#fff", context.fill();
+              context.beginPath(), path(sphere), context.fillStyle = "#CDDBF4", context.fill();
               context.beginPath(), path(land), context.fillStyle = "#2b1a5b", context.fill();
               context.beginPath(), path(sphere), context.stroke();
               context.beginPath(), path({type: "MultiPoint", coordinates: points}), context.fillStyle = "#bf5c66", context.fill();

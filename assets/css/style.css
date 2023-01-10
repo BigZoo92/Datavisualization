@@ -202,6 +202,12 @@ p {
   padding-top: 50px;
   justify-content: space-evenly;
 }
+#data-1 aside canvas {
+  cursor: grab;
+}
+#data-1 aside canvas:active {
+  cursor: grabbing;
+}
 #data-1 article {
   width: 40%;
   display: flex;

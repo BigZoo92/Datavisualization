@@ -4,6 +4,14 @@
     display: flex;
     padding-top: 50px;
     justify-content: space-evenly;
+    aside{
+        canvas{
+            cursor: grab;
+            &:active{
+                cursor: grabbing;
+            }
+        }
+    }
     article{
         width: 40%;
         display: flex;
