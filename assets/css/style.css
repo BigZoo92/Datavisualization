@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -150,13 +151,28 @@ table {
   font-style: normal;
   font-display: swap;
 }
-html {
+html, input {
   font-family: "Montserrat", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Brume";
   color: #bf5c66;
+}
+
+input {
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome */
+  /* Opéra*/
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input::-o-inner-spin-button {
+  -o-appearance: none;
+  margin: 0;
 }
 
 * {
@@ -233,6 +249,31 @@ p {
 }
 #data-2 article h2 {
   width: fit-content;
+}
+#data-2 article .cd-input-data-2 {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  gap: 20px;
+}
+#data-2 article .cd-input-data-2 div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#data-2 article .cd-input-data-2 div input {
+  width: 75%;
+  background: none;
+  outline: none;
+  border: none;
+  color: white;
+  border-bottom: 1px solid #bf5c66;
+  padding: 10px;
+  box-sizing: content-box;
+}
+#data-2 article .cd-input-data-2 div input:focus::placeholder {
+  transition: all ease 0.3s;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -27,10 +27,18 @@
         <h2></h2>
         <p></p>
         <h3>Choisissez une date</h3>
-        <div>
+        <div class="cd-input-data-2">
           <div>
             <label for="years">Année</label>
-            <input type="number" name="years" id="years">
+            <input type="number" name="years" id="years" placeholder="YYYY" aria-placeholder="YYYY" min="1996" max="2023">
+          </div>
+          <div>
+            <label for="month">Mois</label>
+            <input type="number" name="month" id="month" placeholder="MM" aria-placeholder="MM" min="01" max="12">
+          </div>
+          <div>
+            <label for="day">Jour</label>
+            <input type="number" name="day" id="day" placeholder="JJ" aria-placeholder="JJ" min="01" max="31">
           </div>
         </div>
       </article>

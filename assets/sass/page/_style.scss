@@ -38,6 +38,36 @@
         h2{
             width: fit-content;
         }
-        
+        .cd-input-data-2{
+            display: flex;
+            width: 50%;
+            justify-content: space-between;
+            gap: 20px;
+            div{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                label{
+                }
+                input{
+                    width: 75%;
+                    background: none;
+                    outline: none;
+                    border: none;
+                    color: white;
+                    border-bottom: 1px solid $color-secondary;
+                    padding: 10px;
+                    box-sizing: content-box;
+                   
+                    &:focus{
+                        &::placeholder{
+                            transition: all ease 0.3s;
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
