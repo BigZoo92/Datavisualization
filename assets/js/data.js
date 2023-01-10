@@ -7,7 +7,7 @@ const vx = 0.001, vy = -0.001;
 const sphere = ({type: "Sphere"})
 const graticule = d3.geoGraticule10()
 
-const canvas = d3.select('body').append('canvas').attr('width', width).attr('height', height);
+const canvas = d3.select('.container-data-1').append('canvas').attr('width', width).attr('height', height);
 
 const projection = d3.geoOrthographic()
 .fitExtent([[-1, -1], [width + 1, height + 1]], sphere)
@@ -75,10 +75,10 @@ function drag(projection) {
       .on("drag", dragged);
 }
 
-d3.json('land-50m.json')
+d3.json('./assets/json/land-50m.json')
   .then(data1 =>{
     const land50 = topojson.feature(data1, data1.objects.land)
-    d3.json('land-110m.json')
+    d3.json('./assets/json/land-110m.json')
       .then(data2 =>{
         const land110 = topojson.feature(data2, data2.objects.land)
         d3.json('https://data.nasa.gov/resource/gh4g-9sfh.json')
@@ -93,9 +93,9 @@ d3.json('land-50m.json')
             function render(land) {
               context.clearRect(0, 0, width, height);
               context.beginPath(), path(sphere), context.fillStyle = "#fff", context.fill();
-              context.beginPath(), path(land), context.fillStyle = "#000", context.fill();
+              context.beginPath(), path(land), context.fillStyle = "#2b1a5b", context.fill();
               context.beginPath(), path(sphere), context.stroke();
-              context.beginPath(), path({type: "MultiPoint", coordinates: points}), context.fillStyle = "#04E762", context.fill();
+              context.beginPath(), path({type: "MultiPoint", coordinates: points}), context.fillStyle = "#bf5c66", context.fill();
             }
             
             return d3.select(context.canvas)
