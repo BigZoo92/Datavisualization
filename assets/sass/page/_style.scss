@@ -23,3 +23,21 @@
         
     }
 }
+
+#data-2{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    padding-top: 50px;
+    justify-content: space-evenly;
+    article{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        h2{
+            width: fit-content;
+        }
+        
+    }
+}
