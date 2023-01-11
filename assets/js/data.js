@@ -6,6 +6,7 @@ const vx = 0.001, vy = -0.001;
 const sphere = ({type: "Sphere"})
 const graticule = d3.geoGraticule10()
 
+
 const canvas = d3.select('.container-data-1').append('canvas').attr('width', width).attr('height', height);
 
 const projection = d3.geoOrthographic()
@@ -116,7 +117,6 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
           
           if (years.length === 4 && month.length === 2 && day.length === 2) {
             urlData4 = "date=" + years + "-" + month + "-" + day
-            console.log('wesh');
           }
           fetch('https://api.nasa.gov/planetary/apod?api_key=W4wugpb15VvlodnckXfQx2RwCwhoSPDoSEiMuZNi&'+urlData4,{
             headers: {
@@ -138,10 +138,51 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
                 document.querySelector('#data-2 aside img').title = data4["title"];
             })
             .catch(data4 => {
-              console.log("c'est con");
+              console.log("La requ^te ne arche pas, dommage");
             })
         
         })
       })
-
+      let nea = [];
+      let amo = [];
+      let apo = [];
+      let ate = [];
+      let ieo = [];
+      let danger = [];
+      let notDanger = [];
+      let magnitude = [];
+      let lowMagnitude = [];
+      const ctx = document.getElementById('myChart');
+      $.ajax({
+        url : 'serv.php', // your php file
+        type : 'GET', 
+        param: '{}',
+        contentType: "application/json; charset=utf-8",
+        success : function(data){
+          const dataset = JSON.parse(data);
+          console.log(dataset);
+          dataset.forEach(element => {
+            if (element.danger === 'NEA*') {
+              nea.push(element)
+            }
+            if (element.danger === 'AMO*') {
+              amo.push(element)
+            }
+            if (element.danger === 'APO*') {
+              apo.push(element)
+            }
+            if (element.danger === 'ATE*') {
+              ate.push(element)
+            }
+            if (element.danger === 'IEO*') {
+              ieo.push(element)
+            }
+          })
+            console.log(Object.keys(apo));
+          c = new Chart('notes',
+          {type:'bar',
+           data: data});
+              c.update();
+            }  
+     });
 

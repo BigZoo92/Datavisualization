@@ -215,6 +215,11 @@ p {
   text-align: justify;
 }
 
+.division {
+  width: 110%;
+  margin-top: -200px;
+}
+
 #data-1 {
   width: 100%;
   height: 100vh;
