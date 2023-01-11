@@ -30,13 +30,20 @@
     display: flex;
     padding-top: 50px;
     justify-content: space-evenly;
+    aside{
+        width: 40%;
+        img{
+            width: 100%;
+        }
+    }
     article{
         width: 40%;
         display: flex;
         flex-direction: column;
         gap: 25px;
-        h2{
+        h3{
             width: fit-content;
+            color: $color-blue-light;
         }
         .cd-input-data-2{
             display: flex;
@@ -47,7 +54,8 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                label{
+                label, p{
+                    color: $color-blue-light;
                 }
                 input{
                     width: 75%;
@@ -56,15 +64,18 @@
                     border: none;
                     color: white;
                     border-bottom: 1px solid $color-secondary;
-                    padding: 10px;
+                    padding-block: 10px;
                     box-sizing: content-box;
-                   
                     &:focus{
                         &::placeholder{
                             transition: all ease 0.3s;
                             opacity: 0;
                         }
                     }
+                }
+                p{
+                    font-size: 0.7em;
+                    opacity: 0.75;
                 }
             }
         }

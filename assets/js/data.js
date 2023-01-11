@@ -88,7 +88,6 @@ d3.json('./assets/json/land-50m.json')
               } 
               
             }
-            console.log(data3[147]["geolocation"]);
             function render(land) {
               context.clearRect(0, 0, width, height);
               context.beginPath(), path(sphere), context.fillStyle = "#bbc5d7", context.fill();
@@ -106,25 +105,43 @@ d3.json('./assets/json/land-50m.json')
         })
     })
 })
-
+let urlData4 ="";
 // tar -xvzf C:\Users\giver\Downloads\testing-projection-visibility.tgz -C C:\Users\giver\Desktop\testd3
+const input = document.querySelectorAll('.cd-input-data-2 input')
+      input.forEach((e) => {
+        e.addEventListener('input', () => {
+          const years = document.getElementById('years').value
+          const month = document.getElementById('month').value
+          const day = document.getElementById('day').value
+          
+          if (years.length === 4 && month.length === 2 && day.length === 2) {
+            urlData4 = "date=" + years + "-" + month + "-" + day
+            console.log('wesh');
+          }
+          fetch('https://api.nasa.gov/planetary/apod?api_key=W4wugpb15VvlodnckXfQx2RwCwhoSPDoSEiMuZNi&'+urlData4,{
+            headers: {
+                Accept: 'application/json'
+            }
+        })
+            .then(r => {
+                if (r.ok) {
+                    return r.json()
+                } else {
+                    throw new Error('Erreur serveur', {cause: r})
+                }
+            })
+            .then(data4 => {
+                document.querySelector('#data-2 article h3').innerHTML = data4["title"];
+                document.querySelector('#data-2 article p').innerHTML = data4["explanation"];
+                document.querySelector('#data-2 aside img').src = data4["url"];
+                document.querySelector('#data-2 aside img').alt = data4["explanation"];
+                document.querySelector('#data-2 aside img').title = data4["title"];
+            })
+            .catch(data4 => {
+              console.log("c'est con");
+            })
+        
+        })
+      })
 
-fetch('https://api.nasa.gov/planetary/apod?api_key=W4wugpb15VvlodnckXfQx2RwCwhoSPDoSEiMuZNi&date=2003-03-05',{
-    headers: {
-        Accept: 'application/json'
-    }
-})
-    .then(r => {
-        if (r.ok) {
-            return r.json()
-        } else {
-            throw new Error('Erreur serveur', {cause: r})
-        }
-    })
-    .then(data4 => {
-        document.querySelector('#data-2 article h2').innerHTML = data4["title"];
-        document.querySelector('#data-2 article p').innerHTML = data4["explanation"];
-        document.querySelector('#data-2 aside img').src = data4["url"];
-        document.querySelector('#data-2 aside img').alt = data4["explanation"];
-    })
 

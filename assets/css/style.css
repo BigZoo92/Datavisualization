@@ -206,6 +206,10 @@ h2 {
   font-size: 2.5rem;
 }
 
+h3 {
+  font-size: 1.75rem;
+}
+
 p {
   line-height: 1.35;
   text-align: justify;
@@ -241,14 +245,21 @@ p {
   padding-top: 50px;
   justify-content: space-evenly;
 }
+#data-2 aside {
+  width: 40%;
+}
+#data-2 aside img {
+  width: 100%;
+}
 #data-2 article {
   width: 40%;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
-#data-2 article h2 {
+#data-2 article h3 {
   width: fit-content;
+  color: #bbc5d7;
 }
 #data-2 article .cd-input-data-2 {
   display: flex;
@@ -261,6 +272,9 @@ p {
   flex-direction: column;
   gap: 10px;
 }
+#data-2 article .cd-input-data-2 div label, #data-2 article .cd-input-data-2 div p {
+  color: #bbc5d7;
+}
 #data-2 article .cd-input-data-2 div input {
   width: 75%;
   background: none;
@@ -268,12 +282,16 @@ p {
   border: none;
   color: white;
   border-bottom: 1px solid #bf5c66;
-  padding: 10px;
+  padding-block: 10px;
   box-sizing: content-box;
 }
 #data-2 article .cd-input-data-2 div input:focus::placeholder {
   transition: all ease 0.3s;
   opacity: 0;
+}
+#data-2 article .cd-input-data-2 div p {
+  font-size: 0.7em;
+  opacity: 0.75;
 }
 
 /*# sourceMappingURL=style.css.map */
