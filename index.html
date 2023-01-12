@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +8,6 @@
     <title>Dataviusalisation</title>
   </head>
   <body>
-    
     <h1>Space datavisualisation</h1>
     <section id="data-1">
       <article>
@@ -23,41 +22,116 @@
       </article>
       <aside class="container-data-1"></aside>
     </section>
-    <img src="./assets/images/svg/division.svg" alt="space division svg" class="division">
+    <img
+      src="./assets/images/svg/division.svg"
+      alt="space division svg"
+      class="division"
+    />
     <section id="data-2">
       <article>
         <h2>Photo du jour par la NASA</h2>
         <h3>ESO202-G23: Merging Galaxies</h3>
-        <p>SO202-G23 is a colorful mess.  It is a collision between two galaxies taking place over hundreds of millions of years.  The representative colors give astronomers some idea of what is going on. Visible in this jumble is an  active nucleus spewing ultraviolet radiation which lights up surrounding gas (blue); galactic arms contorted by the gravity of the collision (green); a star forming complex left of center (blue); and dust (red).  In billions of years this mess might settle into a relatively normal looking galaxy.</p>
+        <p>
+          SO202-G23 is a colorful mess. It is a collision between two galaxies
+          taking place over hundreds of millions of years. The representative
+          colors give astronomers some idea of what is going on. Visible in this
+          jumble is an active nucleus spewing ultraviolet radiation which lights
+          up surrounding gas (blue); galactic arms contorted by the gravity of
+          the collision (green); a star forming complex left of center (blue);
+          and dust (red). In billions of years this mess might settle into a
+          relatively normal looking galaxy.
+        </p>
         <h4>Choisissez une date</h4>
         <div class="cd-input-data-2">
           <div>
             <label for="years">Année</label>
-            <input type="number" name="years" id="years" placeholder="YYYY" aria-placeholder="YYYY" min="1996" max="2023" value="1999">
+            <input
+              type="number"
+              name="years"
+              id="years"
+              placeholder="YYYY"
+              aria-placeholder="YYYY"
+              min="1996"
+              max="2023"
+              value="1999"
+            />
             <p>1996-2023</p>
           </div>
           <div>
             <label for="month">Mois</label>
-            <input type="number" name="month" id="month" placeholder="MM" aria-placeholder="MM" min="01" max="12" value="01">
+            <input
+              type="number"
+              name="month"
+              id="month"
+              placeholder="MM"
+              aria-placeholder="MM"
+              min="01"
+              max="12"
+              value="01"
+            />
             <p>01-12</p>
           </div>
           <div>
             <label for="day">Jour</label>
-            <input type="number" name="day" id="day" placeholder="JJ" aria-placeholder="JJ" min="01" max="31" value="01">
+            <input
+              type="number"
+              name="day"
+              id="day"
+              placeholder="JJ"
+              aria-placeholder="JJ"
+              min="01"
+              max="31"
+              value="01"
+            />
             <p>01-31</p>
           </div>
         </div>
       </article>
       <aside class="container-data-2">
-        <img src="https://apod.nasa.gov/apod/image/9901/merger_vlt.jpg" alt="SO202-G23 is a colorful mess.  It is a collision between two galaxies taking place over hundreds of millions of years.  The representative colors give astronomers some idea of what is going on. Visible in this jumble is an  active nucleus spewing ultraviolet radiation which lights up surrounding gas (blue); galactic arms contorted by the gravity of the collision (green); a star forming complex left of center (blue); and dust (red).  In billions of years this mess might settle into a relatively normal looking galaxy." title="ESO202-G23: Merging Galaxies">
+        <img
+          src="https://apod.nasa.gov/apod/image/9901/merger_vlt.jpg"
+          alt="SO202-G23 is a colorful mess.  It is a collision between two galaxies taking place over hundreds of millions of years.  The representative colors give astronomers some idea of what is going on. Visible in this jumble is an  active nucleus spewing ultraviolet radiation which lights up surrounding gas (blue); galactic arms contorted by the gravity of the collision (green); a star forming complex left of center (blue); and dust (red).  In billions of years this mess might settle into a relatively normal looking galaxy."
+          title="ESO202-G23: Merging Galaxies"
+        />
       </aside>
     </section>
-    <img src="./assets/images/svg/division.svg" alt="space division svg" class="division">
+    <img
+      src="./assets/images/svg/division.svg"
+      alt="space division svg"
+      class="division"
+    />
     <section id="data-3">
-      <canvas id="myChart"></canvas>
+      <article>
+        <h2>Hazardous Asteroid Orbits</h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos quam
+          mollitia id fugiat asperiores, fugit officiis quasi quia quaerat?
+          Impedit maiores eligendi quos unde corporis quidem et neque delectus
+          assumenda?
+        </p>
+        <select name="pick-data-3" id="pick-data-3">
+          <option value="neo_class">NEO Classification</option>
+          <option value="apo_mag">Magnitude of APO object</option>
+          <option value="ate_mag">Magnitude of ATE object</option>
+          <option value="amo_mag">Magnitude of AMO object</option>
+          <option value="ieo_mag">Magnitude of IEO object</option>
+          <option value="apo_mag">Distance of APO object</option>
+          <option value="ate_mag">Distance of ATE object</option>
+          <option value="amo_mag">Distance of AMO object</option>
+          <option value="ieo_mag">Distance of IEO object</option>
+        </select>
+      </article>
+      <aside>
+        <canvas id="myChart"></canvas>
+      </aside>
     </section>
+    <img
+      src="./assets/images/svg/division.svg"
+      alt="space division svg"
+      class="division"
+    />
   </body>
-  
+
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
@@ -78,10 +152,17 @@
     versor([90, 0, 0]);
   </script>
   <script
-  src="https://code.jquery.com/jquery-3.6.3.min.js"
-  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous"
+  ></script>
   <script src="./assets/js/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.js"
+    integrity="sha512-PRRHSwgn8QJinp43y5B698YK/FApqSvwmd7kVu8NWMksCl/3daKnNbPNWPuGKDrpIIb+0Dg5W55VSbZi0QG60Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <script src="./assets/js/data.js"></script>
 </html>

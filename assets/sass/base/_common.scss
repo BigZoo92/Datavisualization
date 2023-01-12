@@ -15,10 +15,12 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 100px;
+  position: relative;
   background-color: $color-primary;
   color: white;
   font-size: 16px;
   padding-block: 100px;
+  overflow: hidden;
 }
 
 h1{

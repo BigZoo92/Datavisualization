@@ -143,15 +143,26 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
         
         })
       })
-      let nea = [];
-      let amo = [];
-      let apo = [];
-      let ate = [];
-      let ieo = [];
-      let danger = [];
-      let notDanger = [];
-      let magnitude = [];
-      let lowMagnitude = [];
+      let nea = new Array();
+      let amo = new Array();
+      let apo = new Array();
+      let ate = new Array();
+      let ieo = new Array();
+      let notDanger = new Array();
+      let magnitudeAte = new Array();
+      let magnitudeAteMin;
+      let magnitudeAteMax;
+      let magnitudeAmo = new Array();
+      let magnitudeAmoMin;
+      let magnitudeAmoMax;
+      let magnitudeApo = new Array();
+      let magnitudeApoMin;
+      let magnitudeApoMax;
+      let magnitudeIeo = new Array();
+      let magnitudeIeoMin;
+      let magnitudeIeoMax;
+      let classification = new Array();
+      let dataSetChart;
       const ctx = document.getElementById('myChart');
       $.ajax({
         url : 'serv.php', // your php file
@@ -161,28 +172,117 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
         success : function(data){
           const dataset = JSON.parse(data);
           console.log(dataset);
-          dataset.forEach(element => {
-            if (element.danger === 'NEA*') {
-              nea.push(element)
-            }
-            if (element.danger === 'AMO*') {
-              amo.push(element)
-            }
-            if (element.danger === 'APO*') {
-              apo.push(element)
-            }
-            if (element.danger === 'ATE*') {
-              ate.push(element)
-            }
-            if (element.danger === 'IEO*') {
-              ieo.push(element)
-            }
-          })
-            console.log(Object.keys(apo));
-          c = new Chart('notes',
-          {type:'bar',
-           data: data});
-              c.update();
+            dataset.forEach(element => {
+              if (element.danger === 'NEA*') {
+                nea.push(element)
+              }
+              if (element.danger === 'AMO*') {
+                amo.push(element)
+              }
+              if (element.danger === 'APO*') {
+                apo.push(element)
+                
+              }
+              if (element.danger === 'ATE*') {
+                ate.push(element)
+                
+              }
+              if (element.danger === 'IEO*') {
+                ieo.push(element)
+              }
+            })
+            classification.push(nea.length);
+              classification.push(amo.length);
+              classification.push(apo.length);
+              classification.push(ate.length);
+              classification.push(ieo.length);
+
+          
+          
+          // for (let i = 0; i < ate.length; i++) {
+          //   magnitudeAmo.push(parseInt(amo[i]["magnitude"]))
+          // }
+          // magnitudeAmoMin = Math.min(...magnitudeAmo);
+          // magnitudeAmoMax = Math.max(...magnitudeAmo);
+          // magnitudeAmo = math.quantileSeq(magnitudeAmo, [1/3, 1/2,2/3])
+          // magnitudeAmo.unshift(magnitudeAmoMin)
+          // magnitudeAmo.push(magnitudeAmoMax)
+          // for (let i = 0; i < ate.length; i++) {
+          //   magnitudeApo.push(parseInt(apo[i]["magnitude"]))
+          // }
+          // magnitudeApoMin = Math.min(...magnitudeApo);
+          // magnitudeApoMax = Math.max(...magnitudeApo);
+          // magnitudeApo = math.quantileSeq(magnitudeApo, [1/3, 1/2,2/3])
+          // magnitudeApo.unshift(magnitudeApoMin)
+          // magnitudeApo.push(magnitudeApoMax)
+          // for (let i = 0; i < ate.length; i++) {
+          //   magnitudeIeo.push(parseInt(ieo[i]["magnitude"]))
+          // }
+          // magnitudeIeoMin = Math.min(...magnitudeIeo);
+          // magnitudeIeoMax = Math.max(...magnitudeIeo);
+          // magnitudeIeo = math.quantileSeq(magnitudeIeo, [1/3, 1/2,2/3])
+          // magnitudeIeo.unshift(magnitudeIeoMin)
+          // magnitudeIeo.push(magnitudeIeoMax)
+
+            const dataChart = {
+              labels: ['NEA', 'AMO', 'APO', 'ATE', 'IEO'],
+                    datasets: [{
+                        data: classification,
+                        backgroundColor: [
+                            '#e5d9f280',
+                            '#f7aef880',
+                            '#cdc1ff80',
+                            '#c2ffee80',
+                            '#6fffe980'
+                        ],
+                        borderColor: [
+                          '#e5d9f2',
+                            '#f7aef8',
+                            '#cdc1ff',
+                            '#c2ffee',
+                            '#6fffe9'
+                        ],
+                        borderWidth: 1
+                    }]
+            };
+            const config = {
+              type: 'doughnut',
+              data: dataChart,
+              options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                animations: {
+                  radius: {
+                    duration: 400,
+                    easing: 'linear',
+                    loop: (context) => context.active
+                  }
+                }
+                
+              }
+            };
+            const myChart = new Chart(ctx, config);
+            $('#pick-data-3').on('change', function() {
+              if($('#pick-data-3').val() === "neo_class"){
+                dataChart["datasets"][0]["data"] = classification
+              }
+              if($('#pick-data-3').val() === "ate_mag"){
+                console.log('wesh');
+                for (let i = 0; i < ate.length; i++) {
+                  magnitudeAte.push(parseInt(ate[i]["magnitude"]))
+                }
+                magnitudeAteMin = Math.min(...magnitudeAte);
+                magnitudeAteMax = Math.max(...magnitudeAte);
+                magnitudeAte = math.quantileSeq(magnitudeAte, [1/3, 1/2,2/3])
+                magnitudeAte.unshift(magnitudeAteMin)
+                magnitudeAte.push(magnitudeAteMax)
+                dataChart["datasets"][0]["data"] = magnitudeAte
+              }
+              myChart.update()
+            })
             }  
      });
 

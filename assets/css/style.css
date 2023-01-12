@@ -192,10 +192,12 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 100px;
+  position: relative;
   background-color: #0b013c;
   color: white;
   font-size: 16px;
   padding-block: 100px;
+  overflow: hidden;
 }
 
 h1 {
@@ -219,10 +221,14 @@ p {
   width: 110%;
   margin-top: -200px;
 }
+.division:nth-of-type(3) {
+  position: absolute;
+  bottom: -10vw;
+}
 
 #data-1 {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   padding-top: 50px;
   justify-content: space-evenly;
@@ -245,9 +251,10 @@ p {
 
 #data-2 {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   padding-top: 50px;
+  align-items: center;
   justify-content: space-evenly;
 }
 #data-2 aside {
@@ -297,6 +304,38 @@ p {
 #data-2 article .cd-input-data-2 div p {
   font-size: 0.7em;
   opacity: 0.75;
+}
+
+#data-3 {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 40vw;
+}
+#data-3 aside {
+  width: 45%;
+}
+#data-3 aside canvas {
+  width: 100%;
+}
+#data-3 article {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+#data-3 article select {
+  background: none;
+  border: none;
+  outline: none;
+  color: #bbc5d7;
+  border-bottom: 1px solid #bf5c66;
+  padding-bottom: 10px;
+  font-size: 1.25em;
+  font-weight: lighter;
+}
+#data-3 article select option {
+  background: #2b1a5b;
 }
 
 /*# sourceMappingURL=style.css.map */
