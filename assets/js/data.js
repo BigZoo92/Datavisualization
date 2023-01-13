@@ -282,7 +282,6 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
                   labels: ['NEA', 'AMO', 'APO', 'ATE', 'IEO'],
                   datasets: [
                     {
-                      labels: 'Magnitude of ATE Object',
                       data: classification,
                       backgroundColor: [
                         '#e5d9f2B3',
@@ -316,7 +315,7 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
                   labels: ['Minimum', '1er Quartile', 'Médiane', '2ème Quartile', 'Maximum'],
                   datasets: [
                     {
-                      labels: 'Magnitude of ATE Object',
+                      label: 'Magnitude of ATE Object',
                       data: magnitudeAte,
                       backgroundColor: [
                         '#e5d9f2B3',
