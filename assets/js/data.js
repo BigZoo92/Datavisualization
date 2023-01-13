@@ -253,6 +253,12 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
               type: 'doughnut',
               data: dataChart,
               options: {
+                legend: {
+                  labels: {
+                      fontColor: "white",
+                      fontSize: 18
+                  }
+              },
                 plugins: {
                   title: {
                     display: false,
@@ -260,6 +266,22 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
                   }
                 },
                 scales: {
+                  yAxes: [{
+                    ticks: {
+                        fontColor: "green",
+                        fontSize: 18,
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "purple",
+                        fontSize: 14,
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }],
                     y: {
                         beginAtZero: true
                     }
