@@ -9,6 +9,10 @@ body {
   scroll-behavior: smooth;
 }
 
+html{
+  overflow-y: hidden;
+}
+
 body {
   margin: auto;
   display: flex;
@@ -21,21 +25,26 @@ body {
   font-size: 16px;
   padding-block: 100px;
   overflow: hidden;
+  
 }
 
 h1{
-  font-size: 5rem;
+  font-size: clamp(2.25rem, 5.25vw, 5rem);
+  @media (max-width: 900px) {
+    text-align: center;
+  }
 }
 
 h2{
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 3vw, 2.5rem);
 }
 
 h3{
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
 }
 
 p {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
   line-height: 1.35;
   text-align: justify;
 }

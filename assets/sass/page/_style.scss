@@ -1,6 +1,9 @@
 .division{
     width: 110%;
     margin-top: -200px;
+    @media (max-width: 900px) {
+        margin-top: 0;
+    }
     &:nth-of-type(3){
         position: absolute;
         bottom: -10vw;
@@ -12,7 +15,11 @@
     display: flex;
     padding-top: 50px;
     justify-content: space-evenly;
-    
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 100px;
+    }
     aside{
         canvas{
             cursor: grab;
@@ -22,10 +29,14 @@
         }
     }
     article{
+        
         width: 40%;
         display: flex;
         flex-direction: column;
         gap: 25px;
+        @media (max-width: 900px) {
+            width: 90%;
+        }
         h2{
             width: fit-content;
         }
@@ -40,8 +51,16 @@
     padding-top: 50px;
     align-items: center;
     justify-content: space-evenly;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
     aside{
         width: 40%;
+        @media (max-width: 900px) {
+            width: 90%;
+        }
         img{
             width: 100%;
         }
@@ -51,15 +70,32 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
+        @media (max-width: 900px) {
+            width: 90%;
+        }
         h3{
             width: fit-content;
             color: $color-blue-light;
+        }
+        .attention{
+            color: rgb(198, 53, 53);
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity ease 0.15s;
+        }
+        h4{
+            @media (max-width: 900px) {
+                align-self: center;
+              }
         }
         .cd-input-data-2{
             display: flex;
             width: 50%;
             justify-content: space-between;
             gap: 20px;
+            @media (max-width: 900px) {
+                align-self: center;
+              }
             div{
                 display: flex;
                 flex-direction: column;
@@ -97,8 +133,16 @@
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 40vw;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
     aside{
         width: 45%;
+        @media (max-width: 900px) {
+            width: 90%;
+        }
         canvas{
             width: 100%;
         }
@@ -108,6 +152,9 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
+        @media (max-width: 900px) {
+            width: 90%;
+        }
         select{
             background: none;
             border: none;
@@ -123,3 +170,138 @@
         }
     }
 }
+
+.cd-loader{
+    height: 100vh;
+    width: 100%;
+    background-color: $color-secondary;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: clip-path 3s ease-in-out;
+    clip-path: inset(0 0 0 0);
+    h4{
+        color: $color-blue-light;
+        font-size: 3em;
+        position: absolute;
+        transform: translateY(-10vh);
+        transition: opacity 0.5s;
+    }
+    .progress{
+        width: 400px;
+        max-width: 85vw;
+        height: 4px;
+        position: absolute;
+        left: 50%;
+        border-radius: 4px;
+        background: rgba(white, .5);
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        transition: opacity 0.5s;
+        &:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: white;
+            animation: load 7s linear;
+          }
+      }
+    .cd-fusée{
+        position: absolute;
+        bottom: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: shake 0.5s infinite;
+        transition: all 3s ease-in-out;
+        
+        .base1, .base2{
+            position: absolute;
+            height: 15vw;
+            aspect-ratio: 5/15;
+            background-color: #713992;
+            border-radius: 100%;
+            clip-path: inset(0 50% 17% 0);
+        }
+        .base2{
+            clip-path: inset(0 0 17% 50%);
+            background-color: #9c469f;
+        }
+        .base3{
+            position: absolute;
+            height: 3px;
+            width: 3.75vw;
+            bottom: -5.1vw;
+            background-color: white;
+        }
+        .hublot{
+            position: absolute;
+            width: 2.5vw;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background-color: #ac9fa8;
+            border: 3px solid white;
+            top: -4vw;
+        }
+        .aile1, .aile2, .aile3{
+            position: absolute;
+            border-radius: 100%;
+            height: 6vw;
+            aspect-ratio: 1/5;
+            background-color: #3c2364;
+            bottom: -8vw;
+        }
+        .aile2{
+            left: -2.75vw;
+            z-index: -1;
+            bottom: -8.5vw;
+        }
+        .aile3{
+            right: -2.75vw;
+            z-index: -1;
+            bottom: -8.5vw;
+        }
+    }
+    
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -1px) rotate(-1deg); }
+    20% { transform: translate(-1px, 0px) rotate(1deg); }
+    30% { transform: translate(1px, 1px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-1px, 1px) rotate(0deg); }
+    70% { transform: translate(1px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg); }
+  }
+  @keyframes load{
+    0%{width: 0%;}
+    10%{width: 5%;}
+    20%{width: 15%;}
+    30%{width: 25%;}
+    40%{width: 30%;}
+    50%{width: 44%;}
+    60%{width: 50%;}
+    70%{width: 72%;}
+    80%{width: 84%;}
+    90%{width: 92%;}
+    100%{width: 100%;}
+  }
+ 
+    
+
+  @keyframes glow{
+    from{text-shadow:0px 0px 5px #fff,0px 0px 5px #614ad3;}
+    to{text-shadow:0px 0px 20px #fff,0px 0px 20px #614ad3;}
+  }
+  
+  
+    

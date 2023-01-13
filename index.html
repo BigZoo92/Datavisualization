@@ -4,34 +4,59 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Dataviusalisation</title>
   </head>
   <body>
-    <h1>Space datavisualisation</h1>
+    <section class="cd-loader">
+      <h4>Waiting...</h4>
+      <div class="progress"></div>
+      <div class="cd-fusée">
+        <div class="base1"></div>
+        <div class="base2"></div>
+        <div class="base3"></div>
+        <div class="hublot"></div>
+        <div class="aile1"></div>
+        <div class="aile2"></div>
+        <div class="aile3"></div>
+      </div>
+    </section>
+    <h1 data-aos="fade-down">Space datavisualisation</h1>
     <section id="data-1">
       <article>
-        <h2>Crash de météorites</h2>
-        <p>
-          Cette datavisualisation répértorie tous les crash de météorites
-          recenser par la Nasa. Elle se repose donc logiquement sur une API de
-          la nasa. Elle utilise d3.js et repose sur des fonctions mathématiques
-          fournies par le framework. Vous avez notamment la possibilité de drag
-          and drop afin de rotate la map
+        <h2 data-aos="fade-right">Meteorite crashes</h2>
+        <p data-aos="fade-up">
+          A meteorite is a celestial body that reaches the earth's crust. They
+          should not be confused with asteroids or comets which do not reach the
+          earth's crust.<br />They fall all over the Earth, but most of them
+          fall on the Moon which is a natural shield against them. If it wasn't
+          there, we wouldn't be here anymore for a long time. This is why there
+          are so many craters on the Moon.<br />Meteorites, contrary to what one
+          might think, are very beneficial for us. Indeed, according to some
+          theories approved by a large majority of the scientific community,
+          they are perhaps at the origin of life on Earth because they would
+          have brought essential components for the appearance of life. The most
+          telling example is that of water.<br />It is also quite rare that a
+          meteorite dangerous to humans hits the Earth. It is estimated that
+          once every 1000 years on average, a meteorite of about 100 m hits the
+          Earth and that rises to 100 million years for a meteorite of about 10
+          km.
         </p>
       </article>
-      <aside class="container-data-1"></aside>
+      <aside class="container-data-1" data-aos="fade-left"></aside>
     </section>
     <img
       src="./assets/images/svg/division.svg"
       alt="space division svg"
       class="division"
+      data-aos="fade-up"
     />
     <section id="data-2">
       <article>
-        <h2>Photo du jour par la NASA</h2>
-        <h3>ESO202-G23: Merging Galaxies</h3>
-        <p>
+        <h2 data-aos="fade-right">Picture of the day by NASA</h2>
+        <h3 data-aos="fade-left">ESO202-G23: Merging Galaxies</h3>
+        <p data-aos="fade-up">
           SO202-G23 is a colorful mess. It is a collision between two galaxies
           taking place over hundreds of millions of years. The representative
           colors give astronomers some idea of what is going on. Visible in this
@@ -41,10 +66,10 @@
           and dust (red). In billions of years this mess might settle into a
           relatively normal looking galaxy.
         </p>
-        <h4>Choisissez une date</h4>
+        <h4 data-aos="fade-down">Select a date</h4>
         <div class="cd-input-data-2">
-          <div>
-            <label for="years">Année</label>
+          <div data-aos="fade-up">
+            <label for="years">Year</label>
             <input
               type="number"
               name="years"
@@ -54,11 +79,14 @@
               min="1996"
               max="2023"
               value="1999"
+              pattern="\d*"
+              maxlength="4"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <p>1996-2023</p>
           </div>
-          <div>
-            <label for="month">Mois</label>
+          <div data-aos="fade-up">
+            <label for="month">Month</label>
             <input
               type="number"
               name="month"
@@ -68,30 +96,38 @@
               min="01"
               max="12"
               value="01"
+              pattern="\d*"
+              maxlength="2"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <p>01-12</p>
           </div>
-          <div>
-            <label for="day">Jour</label>
+          <div data-aos="fade-up">
+            <label for="day">Day</label>
             <input
               type="number"
               name="day"
               id="day"
-              placeholder="JJ"
-              aria-placeholder="JJ"
+              placeholder="DD"
+              aria-placeholder="DD"
               min="01"
               max="31"
               value="01"
+              pattern="\d*"
+              maxlength="2"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <p>01-31</p>
           </div>
         </div>
+        <p class="attention">Invalid data entered</p>
       </article>
       <aside class="container-data-2">
         <img
           src="https://apod.nasa.gov/apod/image/9901/merger_vlt.jpg"
           alt="SO202-G23 is a colorful mess.  It is a collision between two galaxies taking place over hundreds of millions of years.  The representative colors give astronomers some idea of what is going on. Visible in this jumble is an  active nucleus spewing ultraviolet radiation which lights up surrounding gas (blue); galactic arms contorted by the gravity of the collision (green); a star forming complex left of center (blue); and dust (red).  In billions of years this mess might settle into a relatively normal looking galaxy."
           title="ESO202-G23: Merging Galaxies"
+          data-aos="fade-right"
         />
       </aside>
     </section>
@@ -99,30 +135,44 @@
       src="./assets/images/svg/division.svg"
       alt="space division svg"
       class="division"
+      data-aos="fade-up"
     />
     <section id="data-3">
       <article>
-        <h2>Hazardous Asteroid Orbits</h2>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos quam
-          mollitia id fugiat asperiores, fugit officiis quasi quia quaerat?
-          Impedit maiores eligendi quos unde corporis quidem et neque delectus
-          assumenda?
+        <h2 data-aos="fade-right">Hazardous Asteroid Orbits</h2>
+        <p data-aos="fade-up">
+          A Near Earth Object (NEO) is any small body of the solar system whose
+          orbit brings it closer to the Earth. If the orbit of a NEO crosses the
+          Earth's orbit and the object measures more than 140 meters in
+          diameter, it is considered as a potentially dangerous object. They are
+          classified in 4 categories: <br />
+          Atiras (IEO) have orbits strictly within the Earth's orbit: the
+          aphelion distance of an Atira asteroid is less than the distance from
+          the Earth's perihelion. The Apohele (APO) group of asteroids have a
+          semi-major axis of less than 1 AU and cross the Earth orbit.<br /> The Aton
+          group (ATE) have a semi-major axis of more than 1 AU and cross the
+          Earth orbit.<br /> The Amors (AMO) have orbits strictly outside the Earth
+          orbit: the distance to the perihelion of an Amor asteroid is greater
+          than the distance to the aphelion of the Earth. Amor asteroids are
+          also near-Earth objects, so q < 1.3 AU .<br /><br />
+          In astronomy, the absolute magnitude indicates the intrinsic
+          brightness of a celestial object, in other words, the lower its
+          magnitude, the larger its diameter. So the lower the magnitude, the
+          more dangerous the celestial object is.<br />
+          In conclusion the classification is based on two data, the magnitude
+          (which indicates the diameter) and the distance from the Earth.
         </p>
-        <select name="pick-data-3" id="pick-data-3">
+        <select name="pick-data-3" id="pick-data-3" data-aos="fade-down">
           <option value="neo_class">NEO Classification</option>
           <option value="apo_mag">Magnitude of APO object</option>
           <option value="ate_mag">Magnitude of ATE object</option>
           <option value="amo_mag">Magnitude of AMO object</option>
           <option value="ieo_mag">Magnitude of IEO object</option>
-          <option value="apo_mag">Distance of APO object</option>
-          <option value="ate_mag">Distance of ATE object</option>
-          <option value="amo_mag">Distance of AMO object</option>
-          <option value="ieo_mag">Distance of IEO object</option>
+          <option value="dist">Distance and Magnitude of object</option>
         </select>
       </article>
       <aside>
-        <canvas id="myChart"></canvas>
+        <canvas id="myChart" data-aos="fade-left"></canvas>
       </aside>
     </section>
     <img
@@ -164,5 +214,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script src="./assets/js/data.js"></script>
 </html>

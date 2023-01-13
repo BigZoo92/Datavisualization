@@ -1,4 +1,4 @@
-const width = 600;
+const width = 400;
 const height = width;
 const inset = 20;
 const points = [];
@@ -107,40 +107,59 @@ d3.json('./assets/json/land-50m.json')
     })
 })
 let urlData4 ="";
-// tar -xvzf C:\Users\giver\Downloads\testing-projection-visibility.tgz -C C:\Users\giver\Desktop\testd3
 const input = document.querySelectorAll('.cd-input-data-2 input')
       input.forEach((e) => {
         e.addEventListener('input', () => {
+          
           const years = document.getElementById('years').value
           const month = document.getElementById('month').value
           const day = document.getElementById('day').value
-          
           if (years.length === 4 && month.length === 2 && day.length === 2) {
-            urlData4 = "date=" + years + "-" + month + "-" + day
-          }
-          fetch('https://api.nasa.gov/planetary/apod?api_key=W4wugpb15VvlodnckXfQx2RwCwhoSPDoSEiMuZNi&'+urlData4,{
-            headers: {
-                Accept: 'application/json'
-            }
-        })
-            .then(r => {
-                if (r.ok) {
-                    return r.json()
-                } else {
-                    throw new Error('Erreur serveur', {cause: r})
-                }
-            })
-            .then(data4 => {
-                document.querySelector('#data-2 article h3').innerHTML = data4["title"];
-                document.querySelector('#data-2 article p').innerHTML = data4["explanation"];
-                document.querySelector('#data-2 aside img').src = data4["url"];
-                document.querySelector('#data-2 aside img').alt = data4["explanation"];
-                document.querySelector('#data-2 aside img').title = data4["title"];
-            })
-            .catch(data4 => {
-              console.log("La requ^te ne arche pas, dommage");
-            })
+            if(!(parseInt(years.value) <= 1996 || parseInt(month.value) <= 0 || parseInt(month.value) >= 13 || parseInt(day.value) <= 0)){
+              if(!(parseInt(years.value) === 2023 && parseInt(month.value) >=2)){
+                if(!(parseInt(years.value) === 2023 && parseInt(month.value) === 1 && parseInt(day.value) >= 13)){
+                  if(!(parseInt(month.value) === 2 || parseInt(month.value) === 4 || parseInt(month.value) === 6 || parseInt(month.value) === 9 || parseInt(month.value) === 11 && parseInt(day.value) >= 31)){
+                    document.querySelector('.attention').style.opacity = 0
+                    urlData4 = "date=" + years + "-" + month + "-" + day
+                    fetch('https://api.nasa.gov/planetary/apod?api_key=W4wugpb15VvlodnckXfQx2RwCwhoSPDoSEiMuZNi&'+urlData4,{
+                      headers: {
+                          Accept: 'application/json'
+                      }
+                  })
+                      .then(r => {
+                          if (r.ok) {
+                              return r.json()
+                          } else {
+                              throw new Error('Erreur serveur', {cause: r})
+                          }
+                      })
+                      .then(data4 => {
+                          document.querySelector('#data-2 article h3').innerHTML = data4["title"];
+                          document.querySelector('#data-2 article p').innerHTML = data4["explanation"];
+                          document.querySelector('#data-2 aside img').src = data4["url"];
+                          document.querySelector('#data-2 aside img').alt = data4["explanation"];
+                          document.querySelector('#data-2 aside img').title = data4["title"];
+                      })
+                      .catch(data4 => {
+                        console.log("La requête ne marche pas, dommage");
+                      })
         
+                  }
+                  else{
+                    document.querySelector('.attention').style.opacity = 1
+                  }
+                }else{
+                  document.querySelector('.attention').style.opacity = 1
+                }
+              }else{
+                document.querySelector('.attention').style.opacity = 1
+              }
+            }else{
+              document.querySelector('.attention').style.opacity = 1
+            }
+          }else{
+            document.querySelector('.attention').style.opacity = 1
+          }
         })
       })
       let nea = new Array();
@@ -161,8 +180,21 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
       let magnitudeIeo = new Array();
       let magnitudeIeoMin;
       let magnitudeIeoMax;
+      let distMoy = 0;
+      let distMoyApo = 0;
+      let distMoyAmo = 0;
+      let distMoyAte = 0;
+      let distMoyIeo = 0;
+      let distMoyTab = new Array();
+      let distMag = 0;
+      let distMagApo = 0;
+      let distMagAmo = 0;
+      let distMagAte = 0;
+      let distMagIeo = 0;
+      let distMagTab = new Array();
       let classification = new Array();
       let dataSetChart;
+      let compteur = 0;
       const ctx = document.getElementById('myChart');
       $.ajax({
         url : 'serv.php', // your php file
@@ -171,7 +203,6 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
         contentType: "application/json; charset=utf-8",
         success : function(data){
           const dataset = JSON.parse(data);
-          console.log(dataset);
             dataset.forEach(element => {
               if (element.danger === 'NEA*') {
                 nea.push(element)
@@ -197,43 +228,16 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
               classification.push(ate.length);
               classification.push(ieo.length);
 
-          
-          
-          // for (let i = 0; i < ate.length; i++) {
-          //   magnitudeAmo.push(parseInt(amo[i]["magnitude"]))
-          // }
-          // magnitudeAmoMin = Math.min(...magnitudeAmo);
-          // magnitudeAmoMax = Math.max(...magnitudeAmo);
-          // magnitudeAmo = math.quantileSeq(magnitudeAmo, [1/3, 1/2,2/3])
-          // magnitudeAmo.unshift(magnitudeAmoMin)
-          // magnitudeAmo.push(magnitudeAmoMax)
-          // for (let i = 0; i < ate.length; i++) {
-          //   magnitudeApo.push(parseInt(apo[i]["magnitude"]))
-          // }
-          // magnitudeApoMin = Math.min(...magnitudeApo);
-          // magnitudeApoMax = Math.max(...magnitudeApo);
-          // magnitudeApo = math.quantileSeq(magnitudeApo, [1/3, 1/2,2/3])
-          // magnitudeApo.unshift(magnitudeApoMin)
-          // magnitudeApo.push(magnitudeApoMax)
-          // for (let i = 0; i < ate.length; i++) {
-          //   magnitudeIeo.push(parseInt(ieo[i]["magnitude"]))
-          // }
-          // magnitudeIeoMin = Math.min(...magnitudeIeo);
-          // magnitudeIeoMax = Math.max(...magnitudeIeo);
-          // magnitudeIeo = math.quantileSeq(magnitudeIeo, [1/3, 1/2,2/3])
-          // magnitudeIeo.unshift(magnitudeIeoMin)
-          // magnitudeIeo.push(magnitudeIeoMax)
-
             const dataChart = {
               labels: ['NEA', 'AMO', 'APO', 'ATE', 'IEO'],
                     datasets: [{
                         data: classification,
                         backgroundColor: [
-                            '#e5d9f280',
-                            '#f7aef880',
-                            '#cdc1ff80',
-                            '#c2ffee80',
-                            '#6fffe980'
+                            '#e5d9f2B3',
+                            '#f7aef8B3',
+                            '#cdc1ffB3',
+                            '#c2ffeeB3',
+                            '#6fffe9B3'
                         ],
                         borderColor: [
                           '#e5d9f2',
@@ -249,6 +253,12 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
               type: 'doughnut',
               data: dataChart,
               options: {
+                plugins: {
+                  title: {
+                    display: false,
+                    text: '',
+                  }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
@@ -267,10 +277,32 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
             const myChart = new Chart(ctx, config);
             $('#pick-data-3').on('change', function() {
               if($('#pick-data-3').val() === "neo_class"){
-                dataChart["datasets"][0]["data"] = classification
+                config["type"] = 'doughnut'
+                config["data"] = {
+                  labels: ['NEA', 'AMO', 'APO', 'ATE', 'IEO'],
+                  datasets: [
+                    {
+                      labels: 'Magnitude of ATE Object',
+                      data: classification,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                    }
+                  ]
+                };
               }
               if($('#pick-data-3').val() === "ate_mag"){
-                console.log('wesh');
                 for (let i = 0; i < ate.length; i++) {
                   magnitudeAte.push(parseInt(ate[i]["magnitude"]))
                 }
@@ -279,10 +311,229 @@ const input = document.querySelectorAll('.cd-input-data-2 input')
                 magnitudeAte = math.quantileSeq(magnitudeAte, [1/3, 1/2,2/3])
                 magnitudeAte.unshift(magnitudeAteMin)
                 magnitudeAte.push(magnitudeAteMax)
-                dataChart["datasets"][0]["data"] = magnitudeAte
+                config["type"] = 'bar'
+                config["data"] = {
+                  labels: ['Minimum', '1er Quartile', 'Médiane', '2ème Quartile', 'Maximum'],
+                  datasets: [
+                    {
+                      labels: 'Magnitude of ATE Object',
+                      data: magnitudeAte,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                    }
+                  ]
+                };
+                
+              }
+              if($('#pick-data-3').val() === "apo_mag"){
+                for (let i = 0; i < apo.length; i++) {
+                  magnitudeApo.push(parseInt(apo[i]["magnitude"]))
+                }
+                magnitudeApoMin = Math.min(...magnitudeApo);
+                magnitudeApoMax = Math.max(...magnitudeApo);
+                magnitudeApo = math.quantileSeq(magnitudeApo, [1/3, 1/2,2/3])
+                magnitudeApo.unshift(magnitudeApoMin)
+                magnitudeApo.push(magnitudeApoMax)
+                config["type"] = 'bar'
+                config["data"] = {
+                  labels: ['Minimum', '1er Quartile', 'Médiane', '2ème Quartile', 'Maximum'],
+                  datasets: [
+                    {
+                      label: 'Magnitude of APO Object',
+                      data: magnitudeApo,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                    }
+                  ]
+                };
+              }
+              if($('#pick-data-3').val() === "amo_mag"){
+                for (let i = 0; i < amo.length; i++) {
+                  magnitudeAmo.push(parseInt(amo[i]["magnitude"]))
+                }
+                magnitudeAmoMin = Math.min(...magnitudeAmo);
+                magnitudeAmoMax = Math.max(...magnitudeAmo);
+                magnitudeAmo = math.quantileSeq(magnitudeAmo, [1/3, 1/2,2/3])
+                magnitudeAmo.unshift(magnitudeAmoMin)
+                magnitudeAmo.push(magnitudeAmoMax)
+                config["type"] = 'bar'
+                config["data"] = {
+                  labels: ['Minimum', '1er Quartile', 'Médiane', '2ème Quartile', 'Maximum'],
+                  datasets: [
+                    {
+                      label: 'Magnitude of AMO Object',
+                      data: magnitudeAmo,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                    }
+                  ]
+                };
+              }
+              if($('#pick-data-3').val() === "ieo_mag"){
+                for (let i = 0; i < ieo.length; i++) {
+                  magnitudeIeo.push(parseInt(ieo[i]["magnitude"]))
+                }
+                magnitudeIeoMin = Math.min(...magnitudeIeo);
+                magnitudeIeoMax = Math.max(...magnitudeIeo);
+                magnitudeIeo = math.quantileSeq(magnitudeIeo, [1/3, 1/2,2/3])
+                magnitudeIeo.unshift(magnitudeIeoMin)
+                magnitudeIeo.push(magnitudeIeoMax)
+                config["type"] = 'bar'
+                config["data"] = {
+                  labels: ['Minimum', '1er Quartile', 'Médiane', '2ème Quartile', 'Maximum'],
+                  datasets: [
+                    {
+                      label: 'Magnitude of IEO Object',
+                      data: magnitudeIeo,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                    }
+                  ]
+                };
+              }
+              if($('#pick-data-3').val() === "dist"){
+                for (let i = 0; i < ieo.length; i++) {
+                  distMoyIeo += parseFloat(ieo[i]["distance"])
+                  distMagIeo += parseFloat(ieo[i]["magnitude"])
+                }
+                for (let i = 0; i < apo.length; i++) {
+                  distMoyApo += parseFloat(apo[i]["distance"])
+                  distMagApo += parseFloat(apo[i]["magnitude"])
+                }
+                for (let i = 0; i < ate.length; i++) {
+                  distMoyAte += parseFloat(ate[i]["distance"])
+                  distMagAte += parseFloat(ate[i]["magnitude"])
+                }
+                for (let i = 0; i < amo.length; i++) {
+                  distMoyAmo += parseFloat(amo[i]["distance"])
+                  distMagAmo += parseFloat(amo[i]["magnitude"])
+                }
+                distMoyIeo =  distMoyIeo / ieo.length
+                distMoyAte =  distMoyAte / ate.length
+                distMoyApo =  distMoyApo / apo.length
+                distMoyAmo =  distMoyAmo / amo.length
+                distMagIeo =  distMagIeo / ieo.length
+                distMagAte =  distMagAte / ate.length
+                distMagApo =  distMagApo / apo.length
+                distMagAmo =  distMagAmo / amo.length
+                distMoy = (distMoyIeo + distMoyApo + distMoyAmo + distMoyAte) / ( ate.length + amo.length + apo.length + ieo.length)
+                distMag = (distMagIeo + distMagApo + distMagAmo + distMagAte) / ( ate.length + amo.length + apo.length + ieo.length)
+                distMoyTab.push(distMoyAmo)
+                distMoyTab.push(distMoyApo)
+                distMoyTab.push(distMoyAte)
+                distMoyTab.push(distMoyIeo)
+                distMoyTab.push(distMoy)
+                distMagTab.push(distMagAmo)
+                distMagTab.push(distMagApo)
+                distMagTab.push(distMagAte)
+                distMagTab.push(distMagIeo)
+                distMagTab.push(distMag)
+                if (compteur === 0) {
+                  distMoyTab = distMoyTab.map(x => x * 500);
+                }
+                compteur += 1;
+               
+                config["type"] = 'line'
+                config["data"] = {
+                  labels: ['IEO', 'APO', 'AMO', 'ATE'],
+                  datasets: [
+                    {
+                      pointStyle: 'circle',
+                      pointRadius: 30,
+                      pointHoverRadius: 50,
+                      label: 'Moyenne Distance (au x 500)',
+                      data: distMoyTab,
+                      backgroundColor: [
+                        '#e5d9f2B3',
+                        '#f7aef8B3',
+                        '#cdc1ffB3',
+                        '#c2ffeeB3',
+                        '#6fffe9B3'
+                    ],
+                    borderColor: [
+                      '#e5d9f2',
+                        '#f7aef8',
+                        '#cdc1ff',
+                        '#c2ffee',
+                        '#6fffe9'
+                    ],
+                      stack: 'combined',
+                      type: 'bar'
+                    },
+                    {
+                      label: 'Moyenne Magnitude',
+                      data: distMagTab,
+                      borderColor: '#f7aef8',
+                      backgroundColor: '#f7aef8B3',
+                      stack: 'combined'
+                    }
+                  ]
+                };
               }
               myChart.update()
             })
             }  
      });
-
+setTimeout(() => {
+  
+  document.querySelector('.progress').style.opacity = 0;
+  document.querySelector('.cd-loader h4').style.opacity = 0;
+  document.querySelector('.cd-fusée').style.bottom = '117.5vh';
+  document.querySelector('.cd-fusée').style.animation = 'none';
+  document.querySelector('.cd-loader').style.clipPath = 'inset(0 0 100% 0)';
+  setTimeout(() => {
+    AOS.init();
+    document.querySelector('html').style.overflowY = "visible"
+  }, 7001);
+  setTimeout(() => {
+    document.querySelector('.cd-loader').style.display = 'none';
+  }, 7100);
+}, 7000);
