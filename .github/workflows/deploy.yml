@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,3 +24,14 @@ jobs:
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           source: deploy.zip
           target: /home/ubuntu/meteordatavis
+
+      - name: Extract files on server
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.LIGHTSAIL_IP }}
+          username: ubuntu
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/meteordatavis
+            unzip -o deploy.zip
+            rm deploy.zip  # Facultatif : supprime l'archive après extraction
